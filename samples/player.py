@@ -3,12 +3,12 @@ class Player():
     def __init__(self, name):
         self.name = name
         self._ships = []
-        self.ships_positions = []
+        self._ships_positions = []
         self._board_position_validation = []
-        self.bombs_position = []
+        self._bombs_position = []
 
     def create_ship(self, ship):
-        ship_status = self.verify_if_ship_will_be_choked(ship)
+        ship_status = self.is_some_ship_overlaid(ship)
         if ship_status == 0:
             self._ships.append(ship)
             self.ships_positions.append(ship.structure)
@@ -18,14 +18,15 @@ class Player():
         print(message)
 
     def launch_bomb(self, position):
-        if position in self.bombs_position:
+        if position in _self.bombs_position:
             print("Position {} Already Bombed".format(position))
         else:
-            self.bombs_position.append(position)
+            self._bombs_position.append(position)
 
-    def verify_if_ship_will_be_choked(self, ship):
+    def is_some_ship_overlaid(self, ship):
         if any(x in self._board_position_validation for x in ship.positions):
             return 1
+            #returning 0 or 1 is the best way to say about the overlay?
         else:
             self._board_position_validation.extend(ship.positions)
             return 0

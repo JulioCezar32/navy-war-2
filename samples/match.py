@@ -29,6 +29,3 @@ class Match():
 
             else:
                 print ("ship {} survived with no damage ".format(ship.name))
-            #except IndexError:
-                #return " Position is not avaible"
-                #exit(1)

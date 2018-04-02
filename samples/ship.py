@@ -5,7 +5,7 @@ class Ship():
         self.name = structure['name']
         self.size = structure['size']
         self.generate_structure()
-        self.status = self.Verify_If_All_Positions_Are_Right()
+        self.status = self.verify_ship_boundaries()
 
     def generate_structure(self):
         self.positions = []
@@ -18,16 +18,16 @@ class Ship():
         self.structure = {position : 0 for position in self.positions}
 
 
-    def Verify_If_All_Positions_Are_Right(self):
-        self.board = self.Set_all_right_positions()
+    def verify_ship_boundaries(self):
+        self.board = self.create_set_of_possible_positions()
         if all(x in self.board for x in self.positions):
             return 0
             #print("the ship is in a right position")
         else:
-            print("Ship {} placed is out of the game border".format(self.ship))
+            print("Ship {} placed is out of the game border".format(self.name))
             return 1
 
-    def Set_all_right_positions(self):
+    def create_set_of_possible_positions(self):
         board_size = 5
         rows_numbers = range(1, board_size + 1)
         columns_letters = "ABCDEFGHIJKLMNOPQRSTUVXZ"[:board_size]
